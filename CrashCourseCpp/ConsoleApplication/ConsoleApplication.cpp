@@ -4,46 +4,21 @@
 #include <iostream>
 using namespace std;
 
-// Enumaration are created using braces
-enum EyeColor {Brown, Blue, Green, Gray, Other};
 
 int main()
 {
-	bool isSunny = true;
-	bool isWeekEnd = true;
-	bool haveSomePlan = true;
+	int numbers[7] = { 1,2,3,4,5,6,7 };
+	cout << "numbers : " << numbers << endl;
+	cout << "&numbers : " << &numbers << endl;
+	cout << "numbers[6] : " << numbers[6] << endl;
+	cout << "&numbers[6] : " << &numbers[6] << endl;
 
-	if (isSunny && isWeekEnd) {
-		cout << "Lets fun" << endl;
-		if (haveSomePlan) {
-			cout << "Weekend plan" << endl;
-		}
-	}
-	else if (!isSunny && isWeekEnd) {
-		cout << "go to work with umbralla" << endl;
-	} else {
-		cout << "Its raining" << endl;
-	}
-
-	// Ternary Operators
-	isSunny ? cout << "Ternary: Yeee" << endl : cout << "Ternary: Noo0" << endl;
-
-	// Enum
-	EyeColor eyeColor = Brown;
-
-	switch (eyeColor)
-	{
-	case Brown:
-		cout << "Most Common Color" << endl;
-		break;
-	case Blue: 
-		cout << "Colder Region" << endl;
-		break;
-	case Green:
-		cout << "Young mind" << endl;
-	default:
-		break;
-	}
+	int* numPointer = numbers;
+	cout << "numPointer Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
+	numPointer++;
+	cout << "numPointer++ Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
+	numPointer++;
+	cout << "numPointer++ Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
 
 	system("pause>0");
 }

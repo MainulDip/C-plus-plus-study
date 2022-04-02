@@ -95,3 +95,106 @@ int main()
 	system("pause>0");
 }
 ```
+
+### Looping: while, do while
+
+```cpp
+cout << "While loop\n" << endl;
+
+int counter = 0;
+int second_counter = 0;
+string animals[7] = { "dog", "cat", "cow", "goat" };
+
+while (counter < 7) {
+    cout << counter << endl;
+    counter++;
+}
+
+cout << "\nDoWhile loop\n" << endl;
+
+do {
+    cout << second_counter << endl;
+    second_counter++;
+} while (second_counter < 7);
+
+for (int i = 0; i < 4; i++) {
+    cout << animals[i] << endl;
+}
+```
+
+### Functions:
+> write function signature (declaration) first, function body after the main block;
+
+```cpp
+#include <iostream>
+using namespace std;
+
+float sum(float a, float b);
+// function with default argument value
+void nothingReturn(string str = "Again");
+
+int main()
+{
+	cout << sum(1, 2) << endl;
+	nothingReturn("World");
+	nothingReturn();
+
+	system("pause>0");
+}
+
+float sum(float a, float b) {
+	return a + b;
+}
+
+void nothingReturn(string str) {
+	cout << "Hello " << str << endl;
+}
+```
+
+### Pointers: Ram address of variable, objects, value etc.
+> pointer with function
+```cpp
+void celebrateBirthday(int* age);
+
+int main()
+{
+	int myAge = 26;
+	celebrateBirthday(&myAge);
+	cout << "Now Age Becomes " << myAge << endl;
+
+
+	system("pause>0");
+}
+
+void celebrateBirthday(int* g) {
+	(*g)++;
+	cout << "Happy " << *g << "th Birthday" << endl;
+	
+}
+```
+
+> Pointers with arrays:
+
+```cpp
+int numbers[7] = { 1,2,3,4,5,6,7 };
+cout << "numbers : " << numbers << endl;
+cout << "&numbers : " << &numbers << endl;
+cout << "numbers[6] : " << numbers[6] << endl;
+cout << "&numbers[6] : " << &numbers[6] << endl;
+
+int* numPointer = numbers;
+cout << "numPointer Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
+numPointer++;
+cout << "numPointer++ Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
+numPointer++;
+cout << "numPointer++ Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
+
+    // result
+// numbers : 000000B0C68FF7F8
+// &numbers : 000000B0C68FF7F8
+// numbers[6] : 7
+// &numbers[6] : 000000B0C68FF810
+// numPointer Pointing to 000000B0C68FF7F8 , Value: *numPointer 1
+// numPointer++ Pointing to 000000B0C68FF7FC , Value: *numPointer 2
+// numPointer++ Pointing to 000000B0C68FF800 , Value: *numPointer 3
+```
