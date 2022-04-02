@@ -2,10 +2,50 @@
 //
 
 #include <iostream>
+using namespace std;
+
+// Enumaration are created using braces
+enum EyeColor {Brown, Blue, Green, Gray, Other};
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	bool isSunny = true;
+	bool isWeekEnd = true;
+	bool haveSomePlan = true;
+
+	if (isSunny && isWeekEnd) {
+		cout << "Lets fun" << endl;
+		if (haveSomePlan) {
+			cout << "Weekend plan" << endl;
+		}
+	}
+	else if (!isSunny && isWeekEnd) {
+		cout << "go to work with umbralla" << endl;
+	} else {
+		cout << "Its raining" << endl;
+	}
+
+	// Ternary Operators
+	isSunny ? cout << "Ternary: Yeee" << endl : cout << "Ternary: Noo0" << endl;
+
+	// Enum
+	EyeColor eyeColor = Brown;
+
+	switch (eyeColor)
+	{
+	case Brown:
+		cout << "Most Common Color" << endl;
+		break;
+	case Blue: 
+		cout << "Colder Region" << endl;
+		break;
+	case Green:
+		cout << "Young mind" << endl;
+	default:
+		break;
+	}
+
+	system("pause>0");
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
