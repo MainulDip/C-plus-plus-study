@@ -176,25 +176,37 @@ void celebrateBirthday(int* g) {
 > Pointers with arrays:
 
 ```cpp
-int numbers[7] = { 1,2,3,4,5,6,7 };
-cout << "numbers : " << numbers << endl;
-cout << "&numbers : " << &numbers << endl;
-cout << "numbers[6] : " << numbers[6] << endl;
-cout << "&numbers[6] : " << &numbers[6] << endl;
+#include <iostream>
+using namespace std;
 
-int* numPointer = numbers;
-cout << "numPointer Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
-numPointer++;
-cout << "numPointer++ Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
-numPointer++;
-cout << "numPointer++ Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
 
-    // result
-// numbers : 000000B0C68FF7F8
-// &numbers : 000000B0C68FF7F8
+int main()
+{
+	int numbers[7] = { 1,2,3,4,5,6,7 };
+	cout << "numbers : " << numbers << endl;
+	cout << "&numbers : " << &numbers << endl;
+	cout << "numbers[6] : " << numbers[6] << endl;
+	cout << "&numbers[6] : " << &numbers[6] << endl;
+
+	int* numPointer = numbers;
+	cout << "numPointer Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
+	numPointer++;
+	cout << "numPointer++ Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
+	numPointer++;
+	cout << "numPointer++ Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
+
+	cout << "&number[6] : " << (&numbers[6]) << " where numPointer + 3 = " << numPointer + 3 << " and *numpointer + 3 : " << *numPointer + 3 << endl;
+	cout << "&number[6] : " << (&numbers[6]) << " where numPointer + 4 = " << numPointer + 4 << " and *numpointer + 4 : " << *numPointer + 4 << endl;
+	system("pause>0");
+}
+
+// numbers: 000000B715B2F8B8
+// & numbers : 000000B715B2F8B8
 // numbers[6] : 7
-// &numbers[6] : 000000B0C68FF810
-// numPointer Pointing to 000000B0C68FF7F8 , Value: *numPointer 1
-// numPointer++ Pointing to 000000B0C68FF7FC , Value: *numPointer 2
-// numPointer++ Pointing to 000000B0C68FF800 , Value: *numPointer 3
+// & numbers[6] : 000000B715B2F8D0
+// numPointer Pointing to 000000B715B2F8B8, Value : *numPointer 1
+// numPointer++ Pointing to 000000B715B2F8BC, Value : *numPointer 2
+// numPointer++ Pointing to 000000B715B2F8C0, Value : *numPointer 3
+// & number[6] : 000000B715B2F8D0 where numPointer + 3 = 000000B715B2F8CC and *numpointer + 3 : 6
+// & number[6] : 000000B715B2F8D0 where numPointer + 4 = 000000B715B2F8D0 and *numpointer + 4 : 7
 ```
