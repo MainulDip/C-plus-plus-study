@@ -349,11 +349,12 @@ int main()
 }
 ```
 
-### Enheritance && Polimorphism:
+### Inheritance && Polimorphism (Oobject having many forms):
 ```cpp
 #include <iostream>
 using namespace std;
 
+// Base class
 class Car {
 	// properties are private by default
 private:
@@ -393,15 +394,20 @@ public:
 	}
 };
 
+// Inheritance
+
 class FlyingCar :public Car {
 public:
 	FlyingCar(string n, string c, double p) :Car(n, c, p) {}
 };
 
+// Inheritance and Polimophism
+
 class UnderWaterCar :public Car {
 public:
 	UnderWaterCar(string n, string c, double p) :Car(n, c, p) {}
 
+// Polymorphism by overriding method of the base class
 	void getBroken() {
 		string res = isBroken ? "Broken, so not diveable in the water" : "Not Broken, its moving under water smoothly";
 		cout << "The car is " << res << endl;
@@ -423,6 +429,8 @@ int main()
 
 	UnderWaterCar UCar("Under Water Car", "Black", 7676766);
 	UCar.getBroken();
+
+	// Modification With Pointers
 
 	cout << "\n\nModification With Pointers\n\n";
 

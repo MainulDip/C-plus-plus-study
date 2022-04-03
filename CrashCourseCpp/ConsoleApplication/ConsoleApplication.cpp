@@ -4,7 +4,11 @@
 #include <iostream>
 using namespace std;
 
-class Car {
+class Engine {
+	virtual void setEngine() = 0;
+};
+
+class Car:Engine {
 	// properties are private by default
 private:
 	string Name;
@@ -27,19 +31,9 @@ public:
 		cout << "myCar Name :" << Name << " and Color : " << Color << " and Price : " << Price << endl;
 	}
 
-	void setBroken() {
-		isBroken = true;
-		cout << "Setting CarBroken True" << endl;
-	}
-
-	void getBroken() {
-		string res = isBroken ? "Broken, so not driveable on the road" : "Not Broken, running on the road smooth";
-		cout << "The car is " << res << endl;
-	}
-
-	void carRepair() {
-		cout << "Repairing The Car Done" << endl;
-		isBroken = false;
+	// overriding the abstract/virtual function
+	void setEngine() {
+		cout << "Setting Engine Through Oberriding Virtual Method" << endl;
 	}
 };
 
@@ -62,35 +56,11 @@ int main()
 {
 	Car myCar("Foed1", "Gewwn", 3333);
 	myCar.getInfo();
-	myCar.getBroken();
-	myCar.setBroken();
-	myCar.getBroken();
-	myCar.carRepair();
-	myCar.getBroken();
+	myCar.setEngine();
 
 	FlyingCar FCar("Flying Ford", "Gewwn", 33337);
 	FCar.getInfo();
-
-	UnderWaterCar UCar("Under Water Car", "Black", 7676766);
-	UCar.getBroken();
-
-	cout << "\n\nModification With Pointers\n\n";
-
-	FlyingCar* pointerFCar = &FCar;
-	UnderWaterCar* pointerUCar = &UCar;
-
-	pointerFCar->getBroken();
-	pointerUCar->getBroken();
-
-	cout << "Setting Broken By Pointers" << endl;
-
-	pointerFCar->setBroken();
-	pointerUCar->setBroken();
-
-	cout << "Getting Broken Info Again" << endl;
-
-	pointerFCar->getBroken();
-	pointerUCar->getBroken();
+	FCar.setEngine();
 
 
 	system("pause>0");
