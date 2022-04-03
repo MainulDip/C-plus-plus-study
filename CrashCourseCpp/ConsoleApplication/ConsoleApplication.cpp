@@ -4,34 +4,94 @@
 #include <iostream>
 using namespace std;
 
+class Car {
+	// properties are private by default
+private:
+	string Name;
+	string Color;
+	double Price;
+
+protected:
+	bool isBroken;
+
+public:
+
+	Car(string n, string c, double p) {
+		Name = n;
+		Color = c;
+		Price = p;
+		isBroken = false;
+	}
+
+	void getInfo() {
+		cout << "myCar Name :" << Name << " and Color : " << Color << " and Price : " << Price << endl;
+	}
+
+	void setBroken() {
+		isBroken = true;
+		cout << "Setting CarBroken True" << endl;
+	}
+
+	void getBroken() {
+		string res = isBroken ? "Broken, so not driveable on the road" : "Not Broken, running on the road smooth";
+		cout << "The car is " << res << endl;
+	}
+
+	void carRepair() {
+		cout << "Repairing The Car Done" << endl;
+		isBroken = false;
+	}
+};
+
+class FlyingCar :public Car {
+public:
+	FlyingCar(string n, string c, double p) :Car(n, c, p) {}
+};
+
+class UnderWaterCar :public Car {
+public:
+	UnderWaterCar(string n, string c, double p) :Car(n, c, p) {}
+
+	void getBroken() {
+		string res = isBroken ? "Broken, so not diveable in the water" : "Not Broken, its moving under water smoothly";
+		cout << "The car is " << res << endl;
+	}
+};
 
 int main()
 {
-	int numbers[7] = { 1,2,3,4,5,6,7 };
-	cout << "numbers : " << numbers << endl;
-	cout << "&numbers : " << &numbers << endl;
-	cout << "numbers[6] : " << numbers[6] << endl;
-	cout << "&numbers[6] : " << &numbers[6] << endl;
+	Car myCar("Foed1", "Gewwn", 3333);
+	myCar.getInfo();
+	myCar.getBroken();
+	myCar.setBroken();
+	myCar.getBroken();
+	myCar.carRepair();
+	myCar.getBroken();
 
-	int* numPointer = numbers;
-	cout << "numPointer Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
-	numPointer++;
-	cout << "numPointer++ Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
-	numPointer++;
-	cout << "numPointer++ Pointing to " << numPointer << " , Value: *numPointer " << *numPointer << endl;
+	FlyingCar FCar("Flying Ford", "Gewwn", 33337);
+	FCar.getInfo();
 
-	cout << "&number[6] : " << (&numbers[6]) << " where numPointer + 3 = " << numPointer + 3 << " and *numpointer + 3 : " << *numPointer + 3 << endl;
-	cout << "&number[6] : " << (&numbers[6]) << " where numPointer + 4 = " << numPointer + 4 << " and *numpointer + 4 : " << *numPointer + 4 << endl;
+	UnderWaterCar UCar("Under Water Car", "Black", 7676766);
+	UCar.getBroken();
+
+	cout << "\n\nModification With Pointers\n\n";
+
+	FlyingCar* pointerFCar = &FCar;
+	UnderWaterCar* pointerUCar = &UCar;
+
+	pointerFCar->getBroken();
+	pointerUCar->getBroken();
+
+	cout << "Setting Broken By Pointers" << endl;
+
+	pointerFCar->setBroken();
+	pointerUCar->setBroken();
+
+	cout << "Getting Broken Info Again" << endl;
+
+	pointerFCar->getBroken();
+	pointerUCar->getBroken();
+
+
 	system("pause>0");
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

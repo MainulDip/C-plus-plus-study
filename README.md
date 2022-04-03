@@ -153,24 +153,40 @@ void nothingReturn(string str) {
 
 ### Pointers: Ram address of variable, objects, value etc.
 > pointer with function
+
+Note: Reference address and actual adress is same. Modifying Reference value will also modify the actual valu;
+Pointer: Pointer creates separate memory address for its own. So when value is assaigned it store it on its own address. it don't change the actual value like reference does.
+
 ```cpp
+#include <iostream>
+using namespace std;
 void celebrateBirthday(int* age);
 
 int main()
 {
 	int myAge = 26;
-	celebrateBirthday(&myAge);
+	int& someRef = myAge;
+	celebrateBirthday(&someRef);
 	cout << "Now Age Becomes " << myAge << endl;
+	celebrateBirthday(&someRef);
+	celebrateBirthday(&myAge);
+	// Note: address/reference &myAge and &someRef are same/on-par on each etaration
 
 
 	system("pause>0");
 }
 
 void celebrateBirthday(int* g) {
+	// converting/de-referencing memory address (pointer) to pointer value
 	(*g)++;
 	cout << "Happy " << *g << "th Birthday" << endl;
-	
+
 }
+
+// Happy 27th Birthday
+// Now Age Becomes 27
+// Happy 28th Birthday
+// Happy 29th Birthday
 ```
 
 > Pointers with arrays:
@@ -209,4 +225,224 @@ int main()
 // numPointer++ Pointing to 000000B715B2F8C0, Value : *numPointer 3
 // & number[6] : 000000B715B2F8D0 where numPointer + 3 = 000000B715B2F8CC and *numpointer + 3 : 6
 // & number[6] : 000000B715B2F8D0 where numPointer + 4 = 000000B715B2F8D0 and *numpointer + 4 : 7
+```
+### OOP on C++
+> Without Constructor:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Car {
+	// properties are private by default
+public:
+	string Name;
+	string Color;
+	double Price;
+};
+
+int main()
+{
+	Car myCar;
+	myCar.Name = "Ford";
+	myCar.Color = "Black";
+	myCar.Price = 7777;
+
+	cout << "myCar Name :" << myCar.Name << " and Color : " << myCar.Color << " and Price : " << myCar.Price << endl;
+
+	Car mySCar;
+	mySCar.Name = "Toyota";
+	mySCar.Color = "White";
+	mySCar.Price = 4444;
+
+	cout << "mySCar Name :" << mySCar.Name << " and Color : " << mySCar.Color << " and Price : " << mySCar.Price << endl;
+
+
+	system("pause>0");
+}
+```
+> With Constructor:
+```cpp
+#include <iostream>
+using namespace std;
+
+class Car {
+	// properties are private by default
+public:
+	string Name;
+	string Color;
+	double Price;
+
+	Car(string n, string c, double p) {
+		Name = n;
+		Color = c;
+		Price = p;
+	}
+
+	void getInfo() {
+		cout << "myCar Name :" << Name << " and Color : " << Color << " and Price : " << Price << endl;
+	}
+};
+
+int main()
+{
+	Car myCar("Foed1", "Gewwn", 3333);
+	myCar.getInfo();
+
+	system("pause>0");
+}
+```
+
+### Encapsulation: private/protected/public
+```cpp
+#include <iostream>
+using namespace std;
+
+class Car {
+	// properties are private by default
+private:
+	string Name;
+	string Color;
+	double Price;
+	bool isBroken;
+
+public:
+
+	Car(string n, string c, double p) {
+		Name = n;
+		Color = c;
+		Price = p;
+		isBroken = false;
+	}
+
+	void getInfo() {
+		cout << "myCar Name :" << Name << " and Color : " << Color << " and Price : " << Price << endl;
+	}
+
+	void setBroken() {
+		isBroken = true;
+		cout << "Setting CarBroken True" << endl;
+	}
+
+	void getBroken() {
+		string res = isBroken ? "Broken" : "Not Broken";
+		cout << "The car is " << res << endl;
+	}
+
+	void carRepair() {
+		cout << "Repairing The Car Done" << endl;
+		isBroken = false;
+	}
+};
+
+int main()
+{
+	Car myCar("Foed1", "Gewwn", 3333);
+	myCar.getInfo();
+	myCar.getBroken();
+	myCar.setBroken();
+	myCar.getBroken();
+	myCar.carRepair();
+	myCar.getBroken();
+
+	system("pause>0");
+}
+```
+
+### Enheritance && Polimorphism:
+```cpp
+#include <iostream>
+using namespace std;
+
+class Car {
+	// properties are private by default
+private:
+	string Name;
+	string Color;
+	double Price;
+
+protected:
+	bool isBroken;
+
+public:
+
+	Car(string n, string c, double p) {
+		Name = n;
+		Color = c;
+		Price = p;
+		isBroken = false;
+	}
+
+	void getInfo() {
+		cout << "myCar Name :" << Name << " and Color : " << Color << " and Price : " << Price << endl;
+	}
+
+	void setBroken() {
+		isBroken = true;
+		cout << "Setting CarBroken True" << endl;
+	}
+
+	void getBroken() {
+		string res = isBroken ? "Broken, so not driveable on the road" : "Not Broken, running on the road smooth";
+		cout << "The car is " << res << endl;
+	}
+
+	void carRepair() {
+		cout << "Repairing The Car Done" << endl;
+		isBroken = false;
+	}
+};
+
+class FlyingCar :public Car {
+public:
+	FlyingCar(string n, string c, double p) :Car(n, c, p) {}
+};
+
+class UnderWaterCar :public Car {
+public:
+	UnderWaterCar(string n, string c, double p) :Car(n, c, p) {}
+
+	void getBroken() {
+		string res = isBroken ? "Broken, so not diveable in the water" : "Not Broken, its moving under water smoothly";
+		cout << "The car is " << res << endl;
+	}
+};
+
+int main()
+{
+	Car myCar("Foed1", "Gewwn", 3333);
+	myCar.getInfo();
+	myCar.getBroken();
+	myCar.setBroken();
+	myCar.getBroken();
+	myCar.carRepair();
+	myCar.getBroken();
+
+	FlyingCar FCar("Flying Ford", "Gewwn", 33337);
+	FCar.getInfo();
+
+	UnderWaterCar UCar("Under Water Car", "Black", 7676766);
+	UCar.getBroken();
+
+	cout << "\n\nModification With Pointers\n\n";
+
+	FlyingCar* pointerFCar = &FCar;
+	UnderWaterCar* pointerUCar = &UCar;
+
+	pointerFCar->getBroken();
+	pointerUCar->getBroken();
+
+	cout << "Setting Broken By Pointers" << endl;
+
+	pointerFCar->setBroken();
+	pointerUCar->setBroken();
+
+	cout << "Getting Broken Info Again" << endl;
+
+	pointerFCar->getBroken();
+	pointerUCar->getBroken();
+
+
+	system("pause>0");
+}
 ```
