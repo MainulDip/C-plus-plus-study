@@ -4,100 +4,41 @@
 #include <iostream>
 using namespace std;
 
-class Engine {
-	virtual void setEngine() = 0;
-};
-
-class Car:Engine {
-	// properties are private by default
-private:
-	double Price;
-
-protected:
-	string Color;
-	bool isBroken;
-
-public:
-	string Name;
-
-	Car(string n, string c, double p) {
-		Name = n;
-		Color = c;
-		Price = p;
-		isBroken = false;
-	}
-
-	void getInfo() {
-		cout << "myCar Name :" << Name << " and Color : " << Color << " and Price : " << Price << endl;
-	}
-
-	// overriding the abstract/virtual function
-	void setEngine() {
-		cout << "Setting Engine Through Oberriding Virtual Method" << endl;
-	}
-
-	// prefix with "virtual" to get polymorphic implementation by pointers
-	virtual void movingMedium() {
-		cout << "Road Car Moves On the Road" << endl;
-	}
-};
-
-// to get access of the inherited class add access modifire public
-
-class FlyingCar :public Car {
-private:
-	int flyingHeight;
-public:
-	FlyingCar(string n, string c, double p, int fh) :Car(n, c, p) {
-		flyingHeight = fh;
-	}
-
-	void getHeight() {
-		// can access the public/protected properties in the inherited class
-		cout << "The "<< Name <<" can fly at " << flyingHeight << " feet height in the sky and the color of the car is : " << Color << endl;
-	}
-
-	void movingMedium() {
-		cout << "Flying Car Moves On the Sky" << endl;
-	}
-};
-
-class UnderWaterCar :public Car {
-public:
-	UnderWaterCar(string n, string c, double p) :Car(n, c, p) {}
-
-	void getBroken() {
-		string res = isBroken ? "Broken, so not diveable in the water" : "Not Broken, its moving under water smoothly";
-		cout << "The car is " << res << endl;
-	}
-
-	void movingMedium() {
-		cout << "Under water Car Moves under the water" << endl;
-	}
-};
-
 int main()
 {
-	Car myCar("Foed1", "Gewwn", 3333);
-	myCar.getInfo();
-	myCar.setEngine();
+	int n = 7;
+	cout << "n's address is &n = " << &n << " and value is n = " << n << endl;
+	int* pointerN = &n;
+	cout << "pointerN is : " << pointerN << " and the value/dereferenced of the *pointerN = " << *pointerN << endl;
+	*pointerN = 10;
+	cout << "After re assaigning to 10 pointerN is : " << pointerN << " and the value/dereferenced of the *pointerN = " << *pointerN << endl;
+	cout << "The n value is also changed as n = " << n << endl;
 
-	FlyingCar FCar = FlyingCar("Flying Ford", "Gewwn", 33337, 7777);
-	FCar.getInfo();
-	FCar.setEngine();
-	FCar.getHeight();
+	// other way
+	int& refN = n;
+	cout << "Now the value of refN = " << refN << endl;
 
-	UnderWaterCar UCar = UnderWaterCar("UnderWater Forces", "Gewwn", 7777777);
+	cout << "\n now create another pointer\n" << endl;
 
-	// accessing inherited class by base class pointer for polymorphic methods
-	Car* mc = &myCar;
-	Car* fc = &FCar;
-	Car* uc = &UCar;
+	int* newPN = &refN;
+	cout << "Now the newPN = " << newPN << " and *newPN " << *newPN << endl;
+	(*newPN)++;
+	cout << "\n\nAdding (*newPN)++ newPN = " << newPN << " and *newPN " << *newPN << endl;
+	cout << "The n value is also changed as n = " << n << endl;
 
-	mc->movingMedium();
-	fc->movingMedium();
-	uc->movingMedium();
+	// assaigning new value to old pointer
+	int anotherVal = 77;
+	newPN = &anotherVal;
+	cout << "\n\n*newPN = " << *newPN << endl; // *newPN = 77
+	// this will not change the n valu as it has separate memory location
+	cout << "n = " << n << endl; // n = 11
+	cout << "this will not change the n valu as it has separate memory location\n\n" << endl;
+	// reassaigning to reference will cange the n's value as both memory location is same;
+	refN = anotherVal;
+	cout << "New refN = " << refN << endl; // New refN = 77
+	cout << "n = " << n << endl; // n = 77
 
+	cout << "reassaigning to reference will cange the n's value as both memory location is same" << endl;
 
 	system("pause>0");
 }
