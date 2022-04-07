@@ -89,6 +89,49 @@ int main()
 ```
 
 ### pointers and arrays
+Note: &arr is an address, &arr[0] is a pointer also *(&arr) is a pointer and *(&arr[0]) / *(*(&primeNums)) are dereferencing of pointer which is pointing to the first element of the array.
+
+<details>
+<summary>Address Pointer Referencing and Dereferencing</summary>
+
+```cpp
+	int primeNums[7] = { 1,2,3,5,7,11,13 };
+	
+	cout << "\nArray decays to pointer here => primeNums : " << primeNums << endl;
+
+	cout << "\n address of the whole array => &primeNums : " << &primeNums << " && address of the first element => &primeNums[0] : " << &primeNums[0] << endl;
+	
+	// &primeNums is an address, &primeNums[0] is a pointer also *(&primeNums) is a pointer and *(&primeNums[0]) is dereferencing of a pointer
+
+	bool isEqual = *(&primeNums) == &primeNums[0] ? true : false;
+
+	isEqual ? cout << "*(&primeNums) == &primeNums[0] true" << endl : cout << "*(&primeNums) == &primeNums[0] false" << endl;
+
+	// &primeNums is an address, &primeNums[0] is a pointer also *(&primeNums) is a pointer and *(&primeNums[0]) is dereferencing of a pointer
+	cout << "\n *(&primeNums[0]) : " << *(&primeNums[0]) << " and &primeNums[0] : " << &primeNums[0] << endl;
+
+	// converting address to pointer and then dereferencing again to integer ( fist element of the array )
+	cout << "\n *(*(&primeNums)) : " << *(*(&primeNums)) << endl;
+
+	cout << "\n\n looping \n\n";
+
+	for (int i = 0; i <= size(primeNums) - 1; i++) {
+		cout << primeNums[i] << endl;
+	}
+
+	// looping using pointers
+	cout << "\n\n looping using pointers \n\n";
+
+	for (int i = 0; i <= size(primeNums) - 1; i++) {
+		cout << *(primeNums+i) << endl;
+	}
+```
+
+</details>
+
+<details>
+<summary>More On Pointer arithmetic</summary>
+
 > Pointer arithmetic doesn’t allow following operations-
     Addition of 2 pointers
     Multiplication of a pointer with a constant(Integer)
@@ -98,6 +141,8 @@ int main()
     Addition of a constant(Integer) to a pointer
     Subtraction of a constant(Integer) from a pointer
     Subtraction of 2 pointers
+
+</details>
 
 > How does *(&arr + 1) - arr give the length in elements of array arr?
   https://stackoverflow.com/questions/61237796/how-does-arr-1-arr-give-the-length-in-elements-of-array-arr
