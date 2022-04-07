@@ -4,38 +4,36 @@
 #include <iostream>
 using namespace std;
 
+void getMinMax(int arr[], int* min, int* max) {
+	// pointer setter(referencing) and getter(dereferencing) is same
+	*min = arr[0]; // or arr
+	*max = arr[0];
+	//cout << *min;
+	for (int i = 0; i < sizeof(+arr) - 1; i++) {
+		if (*min > arr[i]) {
+			*min = arr[i];
+		}
+	}
+
+	for (int i = 0; i < sizeof(+arr) - 1; i++) {
+		if (*max < arr[i]) {
+			*max = arr[i];
+		}
+	}
+}
+
 int main()
 {
-	int primeNums[7] = { 1,2,3,5,7,11,13 };
-	
-	cout << "\nArray decays to pointer here => primeNums : " << primeNums << endl;
+	int primeNums[7] = { 1,2,3,5,7,11,-77 };
+	int min;
+	int max;
 
-	cout << "\n address of the whole array => &primeNums : " << &primeNums << " && address of the first element => &primeNums[0] : " << &primeNums[0] << endl;
-	
-	// &primeNums is an address, &primeNums[0] is a pointer also *(&primeNums) is a pointer and *(&primeNums[0]) is dereferencing of a pointer
+	// size(arr) isn't working outsize main function body, find out why
+	cout << size(primeNums) << endl;
 
-	bool isEqual = *(&primeNums) == &primeNums[0] ? true : false;
-
-	isEqual ? cout << "*(&primeNums) == &primeNums[0] true" << endl : cout << "*(&primeNums) == &primeNums[0] false" << endl;
-
-	// &primeNums is an address, &primeNums[0] is a pointer also *(&primeNums) is a pointer and *(&primeNums[0]) is dereferencing of a pointer
-	cout << "\n *(&primeNums[0]) : " << *(&primeNums[0]) << " and &primeNums[0] : " << &primeNums[0] << endl;
-
-	// converting address to pointer and then dereferencing again to integer ( fist element of the array )
-	cout << "\n *(*(&primeNums)) : " << *(*(&primeNums)) << endl;
-
-	cout << "\n\n looping \n\n";
-
-	for (int i = 0; i <= size(primeNums) - 1; i++) {
-		cout << primeNums[i] << endl;
-	}
-
-	// looping using pointers
-	cout << "\n\n looping using pointers \n\n";
-
-	for (int i = 0; i <= size(primeNums) - 1; i++) {
-		cout << *(primeNums+i) << endl;
-	}
+	// return min and max value of an array using only one function and pointers
+	getMinMax(primeNums, &min, &max);
+	cout << "min : " << min << " and max : " << max << endl;
 
 	system("pause>0");
 }
