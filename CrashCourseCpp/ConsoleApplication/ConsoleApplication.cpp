@@ -4,36 +4,32 @@
 #include <iostream>
 using namespace std;
 
-void getMinMax(int arr[], int* min, int* max) {
-	// pointer setter(referencing) and getter(dereferencing) is same
-	*min = arr[0]; // or arr
-	*max = arr[0];
-	//cout << *min;
-	for (int i = 0; i < sizeof(+arr) - 1; i++) {
-		if (*min > arr[i]) {
-			*min = arr[i];
-		}
-	}
-
-	for (int i = 0; i < sizeof(+arr) - 1; i++) {
-		if (*max < arr[i]) {
-			*max = arr[i];
-		}
-	}
-}
-
 int main()
 {
-	int primeNums[7] = { 1,2,3,5,7,11,-77 };
-	int min;
-	int max;
+	int size;
+	cout << "Size : ";
+	cin >> size;
 
-	// size(arr) isn't working outsize main function body, find out why
-	cout << size(primeNums) << endl;
+	// dynamic allocation
+	int* arr = new int[size];
+	
+	cout << "Create the array " << endl;
 
-	// return min and max value of an array using only one function and pointers
-	getMinMax(primeNums, &min, &max);
-	cout << "min : " << min << " and max : " << max << endl;
+	for (int i = 0; i < size; i++) {
+		cout << "Array[" << i << "] : ";
+		cin >> arr[i];
+	}
+
+	// show the user created array
+
+	for (int i = 0; i < size; i++) {
+		//cout << arr[i] << "\t";
+		cout << *(arr + i) << "\t";
+	}
+
+	// deallocate
+	delete[]arr;
+	arr = NULL;
 
 	system("pause>0");
 }

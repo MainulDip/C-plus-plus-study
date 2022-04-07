@@ -237,7 +237,34 @@ int main()
 ### Dynamic arrays - How to create/change
 > compare linked_list with array
 
-> creating and deleting dynamic array allocation
+> creating and deleting dynamic array allocation : int* arr = new int[size]; ==> delete[]arr; ==> arr = NULL;
+
+```cpp
+int size;
+cout << "Size : ";
+cin >> size;
+
+// dynamic allocation
+int* arr = new int[size];
+
+cout << "Create the array " << endl;
+
+for (int i = 0; i < size; i++) {
+	cout << "Array[" << i << "] : ";
+	cin >> arr[i];
+}
+
+// show the user created array
+
+for (int i = 0; i < size; i++) {
+	//cout << arr[i] << "\t";
+	cout << *(arr + i) << "\t";
+}
+
+// deallocate
+delete[]arr;
+arr = NULL;
+```
 
 ### Multidimensional dynamic arrays
 
