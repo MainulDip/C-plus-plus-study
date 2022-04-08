@@ -269,6 +269,11 @@ arr = NULL;
 ### Multidimensional dynamic arrays
 > **table => pointer of pointer.
 
+														0000aa -> { 1, 2, 3, 4}
+**table-> 0000xx	0000xx {0000aa, 0000bb, 0000cc}		0000bb -> { 2, 3, 4, 1}
+														0000cc -> { 1, 2, 3, 4}
+
+
 ```cpp
 	int rows, cols;
 	cout << "Rows , Cols" << endl;
