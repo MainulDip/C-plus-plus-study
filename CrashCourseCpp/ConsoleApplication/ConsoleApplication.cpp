@@ -6,30 +6,33 @@ using namespace std;
 
 int main()
 {
-	int size;
-	cout << "Size : ";
-	cin >> size;
+	int rows, cols;
+	cout << "Rows , Cols" << endl;
+	cin >> rows >> cols;
 
-	// dynamic allocation
-	int* arr = new int[size];
-	
-	cout << "Create the array " << endl;
+	// create the **table and 1st array / linking pointer table array
+	int** table = new int* [rows];
 
-	for (int i = 0; i < size; i++) {
-		cout << "Array[" << i << "] : ";
-		cin >> arr[i];
+	// create 2nd dynamic array by looping
+	for (int i = 0; i < rows; i++) {
+		// create the array with the specified values
+		table[i] = new int[cols];
 	}
 
-	// show the user created array
+	// inter/set value of a col/array slot
+	cout << "Enter in the table[1][2] slot : ";
+	cin >> table[1][2];
 
-	for (int i = 0; i < size; i++) {
-		//cout << arr[i] << "\t";
-		cout << *(arr + i) << "\t";
+	cout << "You Inserted : " << table[1][2] << endl;
+
+	// delete the last array first 
+	for (int i = 0; i < rows; i++) {
+		delete[] table[i];
 	}
 
-	// deallocate
-	delete[]arr;
-	arr = NULL;
+	// delete the linking array
+	delete[] table;
+	table = NULL;
 
 	system("pause>0");
 }
