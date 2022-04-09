@@ -304,11 +304,36 @@ arr = NULL;
 	table = NULL;
 ```
 
-### detect errors and bugs in code
+### detect errors and bugs in code, Mamory Leack
+> Static file analyzer, PVS Studio
+
+> Prevent mamory leaking by deleting and unallocatin dynamic memory
 
 ### Memory Leaks in C++
 
 ### Function Pointers
+> like variable pointer. Function pointer hold function's address and can be called using the pointer. Usually used as callback function.
 
+```cpp
+void someFun() {
+	cout << "Calling From Function Pointer" << endl;
+}
 
+int main()
+{
+	cout << "Printing Function Address => someFun : " << someFun << endl;
+	
+	// init function pointer using function's address
+	void(*funPointer)() = someFun;
+	funPointer(); // Calling From Function Pointer
+
+	system("pause>0");
+}
+```
+
+> Function Pointer Callback:
+
+```cpp
+
+```
 ### Smart pointers (unique, shared, weak)
