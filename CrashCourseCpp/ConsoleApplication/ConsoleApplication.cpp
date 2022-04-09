@@ -2,55 +2,36 @@
 //
 
 #include <iostream>
-#include<vector>
+#include<memory>
 using namespace std;
 
-bool ascendingCompare(int a, int b) { return a < b; }
-
-bool descendingCompare(int a, int b) { return a > b; }
-
-void sorting(vector<int>& numberVector, bool(*compare)(int, int)){
-
-	for (int startIndex = 0; startIndex < numberVector.size(); startIndex++) {
-		int bestIndex = startIndex;
-
-		for (int currendIndex = startIndex + 1; currendIndex < numberVector.size(); currendIndex++) {
-			if (compare(numberVector[currendIndex], numberVector[bestIndex])) {
-				bestIndex = currendIndex;
-			}
-		}
-
-		swap(numberVector[startIndex], numberVector[bestIndex]);
+class MyClass {
+public:
+	MyClass() {
+		cout << "Constructor invoked" << endl;
 	}
-}
 
-void printVectort(vector<int>& numberVector) {
-
-	for (int i = 0; i < numberVector.size(); i++) {
-		cout << numberVector[i] << " ";
+	// destructor
+	~MyClass() {
+		cout << "Destructor invoked, Object Deleted" << endl;
 	}
-}
+};
 
 int main()
 {
-	vector<int>someNumbers = { 1,2,3,4,5,6,7 };
+	// init weak pointer
+	weak_ptr<MyClass> wptr1;
 
-	//bool(*ascCompare)(int, int) = ascendingCompare;
-	//bool(*descCompare)(int, int) = descendingCompare;
+	{
+		// init shared pointer
+		shared_ptr<MyClass> sptr1 = make_shared<MyClass>();
+		wptr1 = sptr1;
 
-	// callback can be set directly without making pointer again
+		cout << "weak pointer tracking " << wptr1.use_count() << endl;
+	}
 
-	//sorting(someNumbers, ascCompare);
-	sorting(someNumbers, ascendingCompare);
-	printVectort(someNumbers);
+	cout << "weak pointer tracking " << wptr1.use_count() << endl;
 
-	cout << "\n\n Printing descending order \n" << endl;
-
-	//sorting(someNumbers, descCompare);
-	sorting(someNumbers, descendingCompare);
-	printVectort(someNumbers);
-
-
-
+	
 	system("pause>0");
 }

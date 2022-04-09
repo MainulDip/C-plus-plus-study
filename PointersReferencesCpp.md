@@ -383,9 +383,173 @@ int main()
 	sorting(someNumbers, descendingCompare);
 	printVectort(someNumbers);
 
-
-
 	system("pause>0");
 }
 ```
 ### Smart pointers (unique, shared, weak)
+> Smart pointers are container or wrapper of the raw pointer. It deallocate/delete mamory automatically when lifecyle ends, hence prevent memory leak. 
+
+_# Unique smart pointer: unique_ptr<int> name = make_unique<int>(77);
+
+```cpp
+#include <iostream>
+#include<memory>
+using namespace std;
+
+int main()
+{
+	unique_ptr<int> someUniquePtr = make_unique<int>(77);
+	cout << "someUniquePtr address is : " << someUniquePtr << " && *someUniquePtr value is : " << *someUniquePtr << endl;
+
+	// unique pointer cannot be shared, but ownership can be transfered
+	// unique_ptr<int> anotherUniquiePtr = someUniquePtr; // this will throw error as it cannot be shared
+	unique_ptr<int> anotherUniquiePtr = move(someUniquePtr); // moving ownership, also it sets previous unique pointer to null
+	
+	cout << "*anotherUniquiePtr : " << anotherUniquiePtr << " && someUniquePtr : " << someUniquePtr << endl;
+
+	// result
+	// someUniquePtr address is : 00000177D14CF630 && *someUniquePtr value is : 77
+	// * anotherUniquiePtr : 00000177D14CF630 && someUniquePtr : 0000000000000000
+	
+	// will throw error as the dereference value is null;
+	// cout << *someUniquePtr : " << *someUniquePtr << endl;
+
+	system("pause>0");
+}
+```
+
+### testing constructor and destructor behavour of the unique smart pointer using scopping;
+
+```cpp
+#include <iostream>
+#include<memory>
+using namespace std;
+
+class MyClass {
+public:
+	MyClass() {
+		cout << "Constructor invoked" << endl;
+	}
+
+	// destructor using "~" tilde, in math it means "approximately" but in logic it means "not", so not-constructor in this case or opposite-of-constructor. voila
+	~MyClass() {
+		cout << "Destructor invoked, Object Deleted" << endl;
+	}
+};
+
+int main()
+{
+	// creating scope using braces
+	{
+		unique_ptr<MyClass> clsPointer = make_unique<MyClass>();
+	}
+
+	cout << "Scope Ends" << endl;
+
+	// result
+	// Constructor invoked
+	// Destructor invoked, Object Deleted
+	// Scope Ends
+	
+	system("pause>0");
+}
+```
+
+
+### Shared Smart Pointer : Unlike Unique, it can be shared between owenrs. or one raw pointer can be shared between multiple owenrs.
+
+```cpp
+#include <iostream>
+#include<memory>
+using namespace std;
+
+class MyClass {
+public:
+	MyClass() {
+		cout << "Constructor invoked" << endl;
+	}
+
+	// destructor
+	~MyClass() {
+		cout << "Destructor invoked, Object Deleted" << endl;
+	}
+};
+
+int main()
+{
+
+	// initializing shared pointer
+	shared_ptr<MyClass> clsSharedPtr = make_shared<MyClass>();
+
+	// shared pointer can keep track of other owenrs.
+	cout << "Shared count : " << clsSharedPtr.use_count() << endl; // 1
+
+	// second shared pointer
+	shared_ptr<MyClass> anotherSharedPtr = clsSharedPtr;
+
+	cout << "Shared count : " << clsSharedPtr.use_count() << endl; // 2
+	cout << "Shared count : " << anotherSharedPtr.use_count() << endl; // 2
+
+
+
+	{
+		// shared_ptr<MyClass> clsSharedPtr = make_shared<MyClass>();
+
+		// cout << "Shared count : " << clsSharedPtr.use_count() << endl; // 1
+
+		// shared_ptr<MyClass> anotherSharedPtr = clsSharedPtr;
+
+		// cout << "Shared count : " << clsSharedPtr.use_count() << endl; // 2
+		// cout << "Shared count : " << anotherSharedPtr.use_count() << endl; // 2
+	}
+
+	// the memory will be deallocated after all the owner's scope.
+	// also note, sharing pointer will not call constructor/destructor again, so it is keeping the singleton pattern
+	
+	system("pause>0");
+}
+```
+
+### Weak Smart Pointer : weak pointer will not keep the object alive if nothing needs it. It will not wait for the scope. But shared pointer will keep the object alive untile owners are destroyed by scope.
+
+```cpp
+#include <iostream>
+#include<memory>
+using namespace std;
+
+class MyClass {
+public:
+	MyClass() {
+		cout << "Constructor invoked" << endl;
+	}
+
+	// destructor
+	~MyClass() {
+		cout << "Destructor invoked, Object Deleted" << endl;
+	}
+};
+
+int main()
+{
+	// init weak pointer
+	weak_ptr<MyClass> wptr1;
+
+	{
+		// init shared pointer
+		shared_ptr<MyClass> sptr1 = make_shared<MyClass>();
+		wptr1 = sptr1;
+
+		cout << "weak pointer tracking " << wptr1.use_count() << endl;
+	}
+
+	cout << "weak pointer tracking " << wptr1.use_count() << endl;
+
+	
+	system("pause>0");
+}
+```
+
+## Further Note:
+1. Need clear info of the weak pointer and use casees.
+2. visual studio dibugging c++, locate the debug menu and explore. usually f10 step over and f11 step into. Use f10 f11 combination for line by line. start with breakpoint marking.
+3. advanced functions, template, closour and lambda
