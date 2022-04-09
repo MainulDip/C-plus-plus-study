@@ -2,19 +2,55 @@
 //
 
 #include <iostream>
+#include<vector>
 using namespace std;
 
-void someFun() {
-	cout << "Calling From Function Pointer" << endl;
+bool ascendingCompare(int a, int b) { return a < b; }
+
+bool descendingCompare(int a, int b) { return a > b; }
+
+void sorting(vector<int>& numberVector, bool(*compare)(int, int)){
+
+	for (int startIndex = 0; startIndex < numberVector.size(); startIndex++) {
+		int bestIndex = startIndex;
+
+		for (int currendIndex = startIndex + 1; currendIndex < numberVector.size(); currendIndex++) {
+			if (compare(numberVector[currendIndex], numberVector[bestIndex])) {
+				bestIndex = currendIndex;
+			}
+		}
+
+		swap(numberVector[startIndex], numberVector[bestIndex]);
+	}
+}
+
+void printVectort(vector<int>& numberVector) {
+
+	for (int i = 0; i < numberVector.size(); i++) {
+		cout << numberVector[i] << " ";
+	}
 }
 
 int main()
 {
-	cout << "Printing Function Address => someFun : " << someFun << endl;
-	
-	// init function pointer using function's address
-	void(*funPointer)() = someFun;
-	funPointer(); // Calling From Function Pointer
+	vector<int>someNumbers = { 1,2,3,4,5,6,7 };
+
+	//bool(*ascCompare)(int, int) = ascendingCompare;
+	//bool(*descCompare)(int, int) = descendingCompare;
+
+	// callback can be set directly without making pointer again
+
+	//sorting(someNumbers, ascCompare);
+	sorting(someNumbers, ascendingCompare);
+	printVectort(someNumbers);
+
+	cout << "\n\n Printing descending order \n" << endl;
+
+	//sorting(someNumbers, descCompare);
+	sorting(someNumbers, descendingCompare);
+	printVectort(someNumbers);
+
+
 
 	system("pause>0");
 }
