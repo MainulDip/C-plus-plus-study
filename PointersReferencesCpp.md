@@ -549,6 +549,52 @@ int main()
 }
 ```
 
+### Tree Data Structure:
+```cpp
+#include <iostream>
+using namespace std;
+
+struct Node
+{
+	int data;
+	Node* left;
+	Node* right;
+};
+
+Node* createNode(int data) {
+	// step 1 => create new Node (pointer);
+	// step 2 => set data
+	// step 3 => takecare of child nodes, initially be null
+	// step 4 => return the reference
+
+	Node* newNode = new Node();
+	newNode->data = data;
+	newNode->left = newNode->right = nullptr; // eatch itaration we're initializing left and right child for every new node
+	return newNode;
+}
+
+int main()
+{
+	Node* root = createNode(1);
+	root->left = createNode(2);
+	root->right = createNode(3);
+	root->left->left = createNode(4);
+
+	//			   root node
+	//				   v 
+	//				  (1)
+	//			 |-----------|
+	//			(2)			(3)
+	//		  |-----|	 |-------|
+	//		 (4)    N	 N		 N
+
+	// N = nullptr
+
+
+	system("pause>0");
+}
+```
+
 ## Further Note:
 1. Need clear info of the weak pointer and use casees.
 2. visual studio dibugging c++, locate the debug menu and explore. usually f10 step over and f11 step into. Use f10 f11 combination for line by line. start with breakpoint marking.
