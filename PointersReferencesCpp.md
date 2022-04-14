@@ -599,3 +599,4 @@ int main()
 1. Need clear info of the weak pointer and use casees.
 2. visual studio dibugging c++, locate the debug menu and explore. usually f10 step over and f11 step into. Use f10 f11 combination for line by line. start with breakpoint marking.
 3. advanced functions, template, closour and lambda
+4. Pointer Void in function params (void*)0

@@ -55,6 +55,11 @@ int main() {
 	glViewport(0,0,700,700); // maybe optional, as its working without this line
 
 
+	//
+	// Creating shaders
+	//
+
+
 	// open gl version of unsinged interger
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
@@ -75,6 +80,26 @@ int main() {
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
+
+
+	// create Vertix Array, Vertex and Fragment Buffer On=bject
+	GLuint VAO, VBO, FBO;
+	glGenVertexArrays(1, &VAO); // generate vao before vbo
+	glGenBuffers(1, &VBO);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	// configuire VAO let opengl know how to work with our VBO
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	//optional
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+
+
 	// setting color
 	glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
 	// execute the buffer color
@@ -85,9 +110,25 @@ int main() {
 
 	// while loop will stop the window from being closed automatically by calling !glfwWindowShouldClose(window) event and 
 	while (!glfwWindowShouldClose(window)) {
+
+		// setting color
+		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		glUseProgram(shaderProgram);
+		glBindVertexArray(VAO);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glfwSwapBuffers(window);
+
+
 		// make window responsive like closeable, resizeable, dragable ect.
 		glfwPollEvents();
 	}
+
+	// clean VAO VBO
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteProgram(shaderProgram);
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
