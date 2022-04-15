@@ -21,3 +21,8 @@ It's a series of functions starts with data (vertexData[]) input and ends with c
 ### Sending data from cpu to gpu:
 it is slow, so do it on big batchs with buffers object (vertex/fragment bugger object). glGenBuffers();
 Binding: Making Current Object (that is ready to feed into a function)
+
+
+### Index Buffers or indices:
+it instruct opengl the order of the indices that will overlap verticies 
+

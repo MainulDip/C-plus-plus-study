@@ -600,3 +600,13 @@ int main()
 2. visual studio dibugging c++, locate the debug menu and explore. usually f10 step over and f11 step into. Use f10 f11 combination for line by line. start with breakpoint marking.
 3. advanced functions, template, closour and lambda
 4. Pointer Void in function params (void*)0
+
+### void pointer:
+A void pointer is a pointer that has no associated data type with it. A void pointer can hold address of any type and can be typecasted to any type.
+```c++
+int a = 10;
+char b = 'x';
+  
+void *p = &a;  // void pointer holds address of int 'a'
+p = &b; // void pointer holds address of char 'b'
+```
