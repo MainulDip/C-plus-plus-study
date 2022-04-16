@@ -201,7 +201,7 @@ int main()
 }
 ```
 
-
-
-
-
+### Header files:
+Evary source/cpp file compiled seperately and compiled into obj/object file.
+After compilation linker will link all those obj files and create the application/exe. If we need to use some code block more than once in other cpp file. Header comes handy to maintain DRY (Don't Repeat Yourself) principle. 
+In Header files we declare the signature and in implementaion/cpp file we implement the signature. SameName.h and SameName.cpp is the naming structure. Voila :)
