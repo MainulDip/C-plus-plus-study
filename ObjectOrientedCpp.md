@@ -1,6 +1,6 @@
 ## Object Oriented C++ Mini Map:
 
-### Abastraction: Like Inheritance in Java
+### Abastraction: (Like Inheritance in Java)
 ```cpp
 class AbstractCls {
     // making abstract/virtual function which needs to be implemented to the inherited class

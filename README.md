@@ -1,7 +1,7 @@
 ## C++ Study Overview:
 This is a personalized docs regarding C++. It could be helpful when youre working with several programming languages. And also it will be a mini map in conjunction with other online documentations. Happy Coding.
 
-### Most Basic Language Tour:
+### Most Basics:
 
 ```cpp
 #include <iostream>
